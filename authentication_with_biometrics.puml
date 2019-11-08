@@ -1,0 +1,30 @@
+@startuml
+title Authentication with biometrics
+
+actor User
+group General Authentication
+User -> "Mobile App": Enter login & password
+"Mobile App" -> "Back-end": Authentication request
+return Response with access_token
+"Mobile App" -> "Mobile App": Save access_token\nin memory storage
+end
+group PIN creation
+"Mobile App" -> User: Request PIN creation
+User -> "Mobile App": Enter PIN
+"Mobile App" -> "Mobile App": Generate salt\nDerive secret key by PIN\nEncrypt access_token with key\nSave salt\nSave encrypted access_token on disk
+"Mobile App" -> "Mobile App": Generate biometric key in keystore\nCreate Cipher instance\nInit Cipher for encryption purposes\nSave Cipher's IV\nCreate CryptoObject
+"Mobile App" -> User: Request biometric credentials
+User -> "Mobile App": Touch the biometric sensor
+"Mobile App" -> "Mobile App": Get Cipher instance from obtained CryptoObject\nEncrypt secret key with Cipher\nSave encrypted secret key on disk
+end
+group Biometric authentication
+"Mobile App" -> "Mobile App": Get key from keystore\nCreate Cipher instance\nLoad Cipher's IV\nInit Cipher for decryption purposes\nCreate CryptoObject
+"Mobile App" -> User: Request biometric credentials
+User -> "Mobile App": Touch the biometric sensor
+"Mobile App" -> "Mobile App": Get Cipher instance from obtained CryptoObject\nDecrypt secret key with Cipher\nDecrypt access token with secret key
+"Mobile App" -> "Mobile App": Init network client with access_token
+"Mobile App" -> "Back-end": Request user data
+return Response with user data
+"Mobile App" -> User: Show user data
+end
+@enduml

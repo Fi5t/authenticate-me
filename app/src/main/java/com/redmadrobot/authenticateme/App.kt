@@ -1,6 +1,7 @@
 package com.redmadrobot.authenticateme
 
 import android.app.Application
+import androidx.biometric.BiometricManager
 import androidx.security.crypto.EncryptedSharedPreferences
 import com.google.crypto.tink.aead.AeadFactory
 import com.google.crypto.tink.aead.AeadKeyTemplates
@@ -35,5 +36,7 @@ class App : Application() {
 
         AeadFactory.getPrimitive(keysetHandle)
     }
+
+    val biometricManager by lazy { BiometricManager.from(this) }
 }
 
