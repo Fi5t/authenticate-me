@@ -1,0 +1,25 @@
+@startuml
+title Authentication with a PIN
+
+actor User
+group General Authentication
+User -> "Mobile App": Enter login & password
+"Mobile App" -> "Back-end": Authentication request
+return Response with access_token
+"Mobile App" -> "Mobile App": Save access_token\nin memory storage
+end
+group PIN creation
+"Mobile App" -> User: Request PIN creation
+User -> "Mobile App": Enter PIN
+"Mobile App" -> "Mobile App": Generate salt\nDerive secret key by PIN\nEncrypt access_token with key\nSave salt\nSave encrypted access_token on disk
+end
+group PIN authentication
+"Mobile App" -> User: Request PIN input
+User -> "Mobile App": Enter PIN
+"Mobile App" -> "Mobile App": Load salt\nDerive secret key by PIN\nLoad encrypted access_token\nDecrypt access_token from disk
+"Mobile App" -> "Mobile App": Init network client with access_token
+"Mobile App" -> "Back-end": Request user data
+return Response with user data
+"Mobile App" -> User: Show user data
+end
+@enduml
