@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/create_pin_root"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:text="@string/create_pin"
+        app:layout_constraintBottom_toTopOf="@+id/hidden_pin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.redmadrobot.authenticateme.internal.view.HiddenEditText
+        android:id="@+id/hidden_pin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        app:emptyDrawable="@drawable/circle_grey"
+        app:filledDrawable="@drawable/circle_accent"
+        app:itemHeight="22dp"
+        app:itemWidth="22dp"
+        app:layout_constraintBottom_toTopOf="@+id/keyboard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:length="4"
+        app:spaceBetween="28dp" />
+
+    <com.redmadrobot.authenticateme.internal.view.NumericKeyboard
+        android:id="@+id/keyboard"
+        style="@style/DefaultKeyboard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
