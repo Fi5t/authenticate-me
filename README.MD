@@ -1,5 +1,5 @@
 # Authenticate me. If you can...
-This repository contains the source code for my article ([habr](https://habr.com/en/company/redmadrobot/blog/475112/)) about PIN & Biometrics authentication methods in Android apps.
+This repository contains the source code for my article ([habr](https://habr.com/en/company/redmadrobot/blog/475112/), [medium](https://medium.com/redmadrobot-mobile/authenticate-me-if-you-can-d01033531a03)) about PIN & Biometrics authentication methods in Android apps.
 
 ### Structure 
 For your comfort the repository is divided by several branches according to the article structure:  
