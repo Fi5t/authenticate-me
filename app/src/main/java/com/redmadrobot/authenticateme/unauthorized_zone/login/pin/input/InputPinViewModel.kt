@@ -31,7 +31,7 @@ class InputPinViewModel(application: Application) : AndroidViewModel(application
 
     val biometricErrorMessage = MutableLiveData<SingleLiveEvent<String>>()
 
-    val biometricParams = MutableLiveData<BiometricParams>()
+    val biometricParams = MutableLiveData<SingleLiveEvent<BiometricParams>>()
 
     private val preferences by lazy { getApplication<App>().encryptedStorage }
     private val aead by lazy { getApplication<App>().pinSecuredAead }
@@ -105,7 +105,7 @@ class InputPinViewModel(application: Application) : AndroidViewModel(application
                     val promptInfo = createPromptInfo()
                     val cryptoObject = BiometricPrompt.CryptoObject(createCipher())
 
-                    biometricParams.value = BiometricParams(promptInfo, cryptoObject)
+                    biometricParams.value = SingleLiveEvent(BiometricParams(promptInfo, cryptoObject))
                 }
             }
         } else {

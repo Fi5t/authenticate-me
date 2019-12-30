@@ -55,7 +55,9 @@ class InputPinFragment : Fragment() {
         })
 
         viewModel.biometricParams.observe(viewLifecycleOwner, Observer { params ->
-            showBiometricPrompt(params)
+            params.getContentIfNotHandled()?.let {
+                showBiometricPrompt(it)
+            }
         })
     }
 
